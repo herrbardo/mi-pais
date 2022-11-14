@@ -28,17 +28,21 @@ public class ProvinceController : MonoBehaviour
     bool isSelected;
     int turnsWithDangeoursUnemployment;
     int unemploymentDangerousPercentage;
+    Dictionary<NaturalResourceCode, int> resourcesUse;
+    
 
     private void Awake()
     {
         ProvinceEvents.GetInstance().ProvinceSelected += ProvinceSelected;
         GameEvents.GetInstance().TurnChanged += TurnChanged;
+
         this.Population = Info.Population;
         this.Money = Info.Money;
         this.MonthlyExpenses = Info.MonthlyExpenses;
         this.EnvironmentPoints = Info.EnvironmentPoints;
         this.State = ProvinceState.Working;
         this.unemploymentDangerousPercentage = 80;
+        resourcesUse = new Dictionary<NaturalResourceCode, int>();
     }
 
     private void OnDestroy()
@@ -87,42 +91,51 @@ public class ProvinceController : MonoBehaviour
 
         foreach (Activity currentActivity in Activities)
         {
-            if(ExistsResourceForThisActivity(currentActivity))
+            List<NaturalResource> resourcesForCurrentActivity = Info.NaturalResources.Where(r => currentActivity.CompatibleResources.Where(c => c == r.Code).Any()).ToList();
+
+            foreach (NaturalResource currentResource in resourcesForCurrentActivity)
             {
+                if(!ResourceIsAvailable(currentResource))
+                    continue;
+                
                 this.EnvironmentPoints -= currentActivity.EnvironmentImpactPerTurn;
                 this.PeopleEmployeed += currentActivity.AmountEmployees;
                 this.Money += CalculateIncome(currentActivity, ref remainingPopulation);
+                SetResourceUse(currentResource);
             }
         }
     }
 
     int CalculateIncome(Activity activity, ref int remainingPopulation)
     {
-        List<NaturalResource> resources = Info.NaturalResources.Where(r => activity.CompatibleResources.Where(c => c == r.Code).Any()).ToList();
         int income = 0;
-        foreach (NaturalResource currentResource in resources)
-        {
-            if(remainingPopulation <= 0)
-                break;
-            else if(activity.AmountEmployees >= remainingPopulation)
-                remainingPopulation = 0;
-            else
-                remainingPopulation -= activity.AmountEmployees;
+        if(remainingPopulation <= 0)
+            return 0;
+        else if(activity.AmountEmployees >= remainingPopulation)
+            remainingPopulation = 0;
+        else
+            remainingPopulation -= activity.AmountEmployees;
 
-            income += activity.AmountEmployees * activity.IncomePerPerson;
-        }
-
+        income += activity.AmountEmployees * activity.IncomePerPerson;
         return income;
     }
 
-    bool ExistsResourceForThisActivity(Activity activity)
+    bool ResourceIsAvailable(NaturalResource resource)
     {
-        return Info.NaturalResources.Where(r => activity.CompatibleResources.Where(c => c == r.Code).Any()).Any();
+        if(resourcesUse.ContainsKey(resource.Code))
+        {
+            return resourcesUse[resource.Code] <= resource.DurationInTurns;
+        }
+        else
+            return true;
     }
 
     void CalculateUnemployment()
     {
-        double unemploymentPercentage = (Population - PeopleEmployeed) / Population * 100;
+        int unemployedPeople = Population - PeopleEmployeed;
+        decimal unemploymentPercentage = unemployedPeople / Population;
+        unemploymentPercentage *= 100;
+
         if(unemploymentPercentage >= this.unemploymentDangerousPercentage)
             this.turnsWithDangeoursUnemployment++;
     }
@@ -135,5 +148,13 @@ public class ProvinceController : MonoBehaviour
             this.State = ProvinceState.Wasted;
         else if(this.turnsWithDangeoursUnemployment > 3)
             this.State = ProvinceState.Disbanded;
+    }
+
+    void SetResourceUse(NaturalResource resource)
+    {
+        if(resourcesUse.ContainsKey(resource.Code))
+                resourcesUse[resource.Code]++;
+            else
+                resourcesUse.Add(resource.Code, 1);
     }
 }
