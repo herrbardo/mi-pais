@@ -26,6 +26,8 @@ public class ProvinceController : MonoBehaviour
     [SerializeField] public ProvinceState State;
 
     bool isSelected;
+    int turnsWithDangeoursUnemployment;
+    int unemploymentDangerousPercentage;
 
     private void Awake()
     {
@@ -36,6 +38,7 @@ public class ProvinceController : MonoBehaviour
         this.MonthlyExpenses = Info.MonthlyExpenses;
         this.EnvironmentPoints = Info.EnvironmentPoints;
         this.State = ProvinceState.Working;
+        this.unemploymentDangerousPercentage = 80;
     }
 
     private void OnDestroy()
@@ -68,6 +71,17 @@ public class ProvinceController : MonoBehaviour
 
     void TurnChanged(int turn)
     {
+        if(State != ProvinceState.Working)
+            return;
+
+        this.Money -= Info.MonthlyExpenses;
+        CalculateActivityImpactPerTurn();
+        CalculateUnemployment();
+        EvaluateProvinceState();
+    }
+
+    void CalculateActivityImpactPerTurn()
+    {
         int remainingPopulation = Population;
         PeopleEmployeed = 0;
 
@@ -80,8 +94,6 @@ public class ProvinceController : MonoBehaviour
                 this.Money += CalculateIncome(currentActivity, ref remainingPopulation);
             }
         }
-
-        this.Money -= Info.MonthlyExpenses;
     }
 
     int CalculateIncome(Activity activity, ref int remainingPopulation)
@@ -106,5 +118,22 @@ public class ProvinceController : MonoBehaviour
     bool ExistsResourceForThisActivity(Activity activity)
     {
         return Info.NaturalResources.Where(r => activity.CompatibleResources.Where(c => c == r.Code).Any()).Any();
+    }
+
+    void CalculateUnemployment()
+    {
+        double unemploymentPercentage = (Population - PeopleEmployeed) / Population * 100;
+        if(unemploymentPercentage >= this.unemploymentDangerousPercentage)
+            this.turnsWithDangeoursUnemployment++;
+    }
+
+    void EvaluateProvinceState()
+    {
+        if(this.Money <= 0)
+            this.State = ProvinceState.Broke;
+        else if(this.EnvironmentPoints <= 0)
+            this.State = ProvinceState.Wasted;
+        else if(this.turnsWithDangeoursUnemployment > 3)
+            this.State = ProvinceState.Disbanded;
     }
 }

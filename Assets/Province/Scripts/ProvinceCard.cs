@@ -17,6 +17,7 @@ public class ProvinceCard : MonoBehaviour
     [SerializeField] TMP_Text NaturalResourcesText;
     [SerializeField] TMP_Text ArrastrarAquiText;
     [SerializeField] ActivityContainer Container;
+    [SerializeField] ProvinceLostContainer ProvinceLostContainer;
 
     ProvinceController _selectedProvince;
 
@@ -31,6 +32,7 @@ public class ProvinceCard : MonoBehaviour
     {
         ProvinceNameText.text = NaturalResourcesText.text = string.Empty;
         ArrastrarAquiText.enabled = false;
+        ProvinceLostContainer.Hide();
         ClearCard();
     }
 
@@ -51,7 +53,7 @@ public class ProvinceCard : MonoBehaviour
         PopulationText.text = "Población: " + controller.Population.ToString("N0");
         EmployeesText.text = "Empleados: " + controller.PeopleEmployeed.ToString("N0");
         EnvironmentPointsText.text = "Ambiente: " + controller.EnvironmentPoints.ToString("N0");
-        StateText.text = "Estado: " + controller.State.ToString();
+        StateText.text = "Estado: " + GetStateName(controller.State);
 
         ArrastrarAquiText.enabled = true;
         NaturalResourcesText.text = "Recursos: ";
@@ -69,6 +71,8 @@ public class ProvinceCard : MonoBehaviour
         
         foreach (Activity item in controller.Activities)
             Container.EnableActivity(item.Name);
+
+        ProvinceLostContainer.ShowState(controller.State);
     }
 
     void ActivityAssigned(Activity activity)
@@ -96,5 +100,24 @@ public class ProvinceCard : MonoBehaviour
     {
         if(_selectedProvince != null)
             ProvinceSelected(_selectedProvince);
+    }
+
+    string GetStateName(ProvinceState state)
+    {
+        switch(state)
+        {
+            case ProvinceState.Broke:
+                return "En quiebra";
+            
+            case ProvinceState.Wasted:
+                return "Arruinada";
+
+            case ProvinceState.Disbanded:
+                return "Desbandada";
+
+            case ProvinceState.Working:
+            default:
+                return "Funcionando";
+        }
     }
 }
