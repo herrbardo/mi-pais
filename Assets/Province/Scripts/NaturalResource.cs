@@ -20,6 +20,8 @@ public class NaturalResource : ScriptableObject
     public string Name;
     public int DurationInTurns;
     public NaturalResourceCode Code;
+    public Sprite Logo;
+    public bool IsBig;
 
     public NaturalResource(){}
 }

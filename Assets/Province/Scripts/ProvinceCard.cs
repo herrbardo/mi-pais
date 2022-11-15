@@ -4,9 +4,11 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Linq;
+using UnityEngine.UI;
 
 public class ProvinceCard : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField] TMP_Text ProvinceNameText;
     [SerializeField] TMP_Text MoneyText;
     [SerializeField] TMP_Text MoneyPerMonthText;
@@ -16,8 +18,13 @@ public class ProvinceCard : MonoBehaviour
     [SerializeField] TMP_Text StateText;
     [SerializeField] TMP_Text NaturalResourcesText;
     [SerializeField] TMP_Text ArrastrarAquiText;
+
+    [Header("Objects")]
     [SerializeField] ActivityContainer Container;
     [SerializeField] ProvinceLostContainer ProvinceLostContainer;
+    [SerializeField] GameObject ResourcePrefab;
+    [SerializeField] GameObject ResourceContainer;
+    [SerializeField] List<ResourceItem> Resources;
 
     ProvinceController _selectedProvince;
 
@@ -30,7 +37,7 @@ public class ProvinceCard : MonoBehaviour
     
     private void Start()
     {
-        ProvinceNameText.text = NaturalResourcesText.text = string.Empty;
+        ProvinceNameText.text = string.Empty;
         ArrastrarAquiText.enabled = false;
         ProvinceLostContainer.Hide();
         ClearCard();
@@ -45,30 +52,12 @@ public class ProvinceCard : MonoBehaviour
 
     void ProvinceSelected(ProvinceController controller)
     {
+        ClearCard();
         _selectedProvince = controller;
-
-        ProvinceNameText.text = controller.Info.DisplayName;
-        MoneyText.text = "Dinero: $" + controller.Money.ToString("N0");
-        MoneyPerMonthText.text = "Gastos por turno: $" + controller.MonthlyExpenses.ToString("N0");
-        PopulationText.text = "Población: " + controller.Population.ToString("N0");
-        EmployeesText.text = "Empleados: " + controller.PeopleEmployeed.ToString("N0");
-        EnvironmentPointsText.text = "Ambiente: " + controller.EnvironmentPoints.ToString("N0");
-        StateText.text = "Estado: " + GetStateName(controller.State);
-
         ArrastrarAquiText.enabled = true;
-        NaturalResourcesText.text = "Recursos: ";
-        bool oneResourceAlreadyAdded = false;
+        SetKpis(controller);
+        ShowNaturalResources(controller.Info.NaturalResources);
         Container.DisableAllActivities();
-
-        foreach (NaturalResource item in controller.Info.NaturalResources)
-        {
-            if(oneResourceAlreadyAdded)
-                NaturalResourcesText.text += ", ";
-
-            NaturalResourcesText.text += item.Name;
-            oneResourceAlreadyAdded = true;
-        }
-        
         foreach (Activity item in controller.Activities)
             Container.EnableActivity(item.Name);
 
@@ -87,13 +76,15 @@ public class ProvinceCard : MonoBehaviour
     void ClearCard()
     {
         ProvinceNameText.text = "Seleccione una provincia...";
-        NaturalResourcesText.text = string.Empty;
         MoneyText.text = "$0";
         MoneyPerMonthText.text = "$0";
         PopulationText.text = "$0";
         EmployeesText.text = "$0";
         EnvironmentPointsText.text = string.Empty;
         StateText.text = string.Empty;
+
+        foreach (ResourceItem currentItem in Resources)
+            currentItem.gameObject.SetActive(false);
     }
 
     void TurnChanged(int turn)
@@ -119,5 +110,28 @@ public class ProvinceCard : MonoBehaviour
             default:
                 return "Funcionando";
         }
+    }
+
+    void SetKpis(ProvinceController controller)
+    {
+        ProvinceNameText.text = controller.Info.DisplayName;
+        MoneyText.text = "Dinero: $" + controller.Money.ToString("N0");
+        MoneyPerMonthText.text = "Gastos por turno: $" + controller.MonthlyExpenses.ToString("N0");
+        PopulationText.text = "Población: " + controller.Population.ToString("N0");
+        EmployeesText.text = "Empleados: " + controller.PeopleEmployeed.ToString("N0");
+        EnvironmentPointsText.text = "Ambiente: " + controller.EnvironmentPoints.ToString("N0");
+        StateText.text = "Estado: " + GetStateName(controller.State);
+    }
+
+    void ShowNaturalResources(List<NaturalResource> naturalResources)
+    {
+        foreach (NaturalResource item in naturalResources)
+        {
+            ResourceItem localResourceItem = Resources.Where(r => r.ResourceInfo.Code == item.Code && r.ResourceInfo.IsBig == item.IsBig).First();
+            localResourceItem.gameObject.SetActive(true);
+        }
+
+        HorizontalLayoutGroup layoutGroup = ResourceContainer.GetComponent<HorizontalLayoutGroup>();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(layoutGroup.GetComponent<RectTransform>());
     }
 }
