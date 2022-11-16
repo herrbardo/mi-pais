@@ -26,6 +26,7 @@ public class DragNDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     {
         canvasGroup.alpha = .6f;
         canvasGroup.blocksRaycasts = false;
+        UIEvents.GetInstance().OnElementBeginDrag(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -37,7 +38,7 @@ public class DragNDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     {
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-
+        UIEvents.GetInstance().OnElementEndDrag(eventData);
         if(ReturnToOriginWhenRelease)
         {
             transform.localPosition = originalLocalPosition;

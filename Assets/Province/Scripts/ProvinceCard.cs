@@ -25,6 +25,7 @@ public class ProvinceCard : MonoBehaviour
     [SerializeField] GameObject ResourcePrefab;
     [SerializeField] GameObject ResourceContainer;
     [SerializeField] List<ResourceItem> Resources;
+    [SerializeField] TrashCan TrashCan;
 
     ProvinceController _selectedProvince;
 
@@ -32,6 +33,7 @@ public class ProvinceCard : MonoBehaviour
     {
         ProvinceEvents.GetInstance().ProvinceSelected += ProvinceSelected;
         ProvinceEvents.GetInstance().ActivityAssigned += ActivityAssigned;
+        ProvinceEvents.GetInstance().ActivityUnassigned += ActivityUnassigned;
         GameEvents.GetInstance().TurnChanged += TurnChanged;
     }
     
@@ -47,12 +49,14 @@ public class ProvinceCard : MonoBehaviour
     {
         ProvinceEvents.GetInstance().ProvinceSelected -= ProvinceSelected;
         ProvinceEvents.GetInstance().ActivityAssigned -= ActivityAssigned;
+        ProvinceEvents.GetInstance().ActivityUnassigned -= ActivityUnassigned;
         GameEvents.GetInstance().TurnChanged -= TurnChanged;
     }
 
     void ProvinceSelected(ProvinceController controller)
     {
         ClearCard();
+        TrashCan.ShowTrashCan = true;
         _selectedProvince = controller;
         ArrastrarAquiText.enabled = true;
         SetKpis(controller);
@@ -73,6 +77,19 @@ public class ProvinceCard : MonoBehaviour
         ProvinceSelected(_selectedProvince);
     }
 
+    void ActivityUnassigned(Activity activity)
+    {
+        if(_selectedProvince == null)
+            return;
+
+        Activity activityToRemove = _selectedProvince.Activities.Where(a => a.Name.Equals(activity.Name)).FirstOrDefault();
+        if(activityToRemove == null)
+            return;
+
+        _selectedProvince.Activities.Remove(activityToRemove);
+        ProvinceSelected(_selectedProvince);
+    }
+
     void ClearCard()
     {
         ProvinceNameText.text = "Seleccione una provincia...";
@@ -82,6 +99,7 @@ public class ProvinceCard : MonoBehaviour
         EmployeesText.text = "$0";
         EnvironmentPointsText.text = string.Empty;
         StateText.text = string.Empty;
+        TrashCan.ShowTrashCan = false;
 
         foreach (ResourceItem currentItem in Resources)
             currentItem.gameObject.SetActive(false);

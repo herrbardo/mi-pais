@@ -4,6 +4,7 @@ using UnityEngine;
 
 public delegate void ProvinceSelectedDelegate(ProvinceController provinceController);
 public delegate void ActivityAssignedDelegate(Activity activity);
+public delegate void ActivityUnassignedDelegate(Activity activity);
 
 public class ProvinceEvents
 {
@@ -18,8 +19,9 @@ public class ProvinceEvents
         return instance;
     }
 
-    public ProvinceSelectedDelegate ProvinceSelected;
-    public ActivityAssignedDelegate ActivityAssigned;
+    public event ProvinceSelectedDelegate ProvinceSelected;
+    public event ActivityAssignedDelegate ActivityAssigned;
+    public event ActivityUnassignedDelegate ActivityUnassigned;
 
     public void OnProvinceSelected(ProvinceController provinceController)
     {
@@ -31,5 +33,11 @@ public class ProvinceEvents
     {
         if(ActivityAssigned != null)
             ActivityAssigned(activity);
+    }
+
+    public void OnActivityUnassigned(Activity activity)
+    {
+        if(ActivityUnassigned != null)
+            ActivityUnassigned(activity);
     }
 }
