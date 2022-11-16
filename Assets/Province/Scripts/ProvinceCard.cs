@@ -127,7 +127,7 @@ public class ProvinceCard : MonoBehaviour
     {
         foreach (NaturalResource item in naturalResources)
         {
-            ResourceItem localResourceItem = Resources.Where(r => r.ResourceInfo.Code == item.Code && r.ResourceInfo.IsBig == item.IsBig).First();
+            ResourceItem localResourceItem = Resources.Where(r => r.ResourceInfo.Code == item.Code).First();
             localResourceItem.gameObject.SetActive(true);
         }
 

@@ -5,11 +5,6 @@ using TMPro;
 
 public class ActivityCard : MonoBehaviour
 {
-    [Header("Components")]
-    [SerializeField] RectTransform Rect;
-    [SerializeField] Canvas ParentCanvas;
-    [SerializeField] Vector3 OffsetPosition;
-
     [Header("Activity Components")]
     [SerializeField] TMP_Text ActivityNameText;
     [SerializeField] TMP_Text IncomePerPersonText;
@@ -24,11 +19,6 @@ public class ActivityCard : MonoBehaviour
     private void OnDestroy()
     {
         UIEvents.GetInstance().MouseActivityAction -= MouseActivityAction;
-    }
-
-    private void Update()
-    {
-        MoveToMouse();
     }
 
     void Hide()
@@ -49,17 +39,7 @@ public class ActivityCard : MonoBehaviour
             FillWithActivityData(item);
         }
         else
-        {
             Hide();
-        }
-    }
-
-    void MoveToMouse()
-    {
-        Vector2 movePos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(ParentCanvas.transform as RectTransform, Input.mousePosition, ParentCanvas.worldCamera, out movePos);
-        Vector3 mousePos = ParentCanvas.transform.TransformPoint(movePos);
-        transform.position = mousePos + OffsetPosition;
     }
 
     void FillWithActivityData(Activity activity)
