@@ -9,6 +9,7 @@ public class ResourceCard : MonoBehaviour
     [SerializeField] TMP_Text ResourceNameText;
     [SerializeField] TMP_Text DurationInTurnsText;
     [SerializeField] TMP_Text CooldownInTurnsText;
+    [SerializeField] FollowingCard FollowingCardController;
 
     private void Awake()
     {
@@ -31,10 +32,11 @@ public class ResourceCard : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
-    void MouseResourceAction(NaturalResource resource, bool enter)
+    void MouseResourceAction(NaturalResource resource, bool enter, Vector3 offset)
     {
         if(enter)
         {
+            FollowingCardController.OffsetPosition = offset;
             Show();
             FillCardWithResourceData(resource);
         }

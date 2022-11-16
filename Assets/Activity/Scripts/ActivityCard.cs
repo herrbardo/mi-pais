@@ -10,6 +10,7 @@ public class ActivityCard : MonoBehaviour
     [SerializeField] TMP_Text IncomePerPersonText;
     [SerializeField] TMP_Text EmployeesText;
     [SerializeField] List<ResourceItem> Resources;
+    [SerializeField] FollowingCard FollowingCardController;
 
     private void Awake()
     {
@@ -31,10 +32,11 @@ public class ActivityCard : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
-    void MouseActivityAction(Activity item, bool enter)
+    void MouseActivityAction(Activity item, bool enter, Vector3 offset)
     {
         if(enter)
         {
+            FollowingCardController.OffsetPosition = offset;
             Show();
             FillWithActivityData(item);
         }

@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class ActivityItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] public Activity ActivityInfo;
+    [SerializeField] Vector3 OffsetForCard;
 
     Image imageComponent;
 
@@ -24,11 +25,11 @@ public class ActivityItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UIEvents.GetInstance().OnMouseActivityAction(this.ActivityInfo, true);
+        UIEvents.GetInstance().OnMouseActivityAction(this.ActivityInfo, true, OffsetForCard);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        UIEvents.GetInstance().OnMouseActivityAction(this.ActivityInfo, false);
+        UIEvents.GetInstance().OnMouseActivityAction(this.ActivityInfo, false, OffsetForCard);
     }
 }

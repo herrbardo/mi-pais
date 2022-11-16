@@ -227,6 +227,7 @@ MonoBehaviour:
   - {fileID: 1713726102}
   - {fileID: 870556481}
   - {fileID: 1990834897}
+  FollowingCardController: {fileID: 29376579}
 --- !u!114 &29376579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +242,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rect: {fileID: 29376575}
   ParentCanvas: {fileID: 1267939881}
-  OffsetPosition: {x: 2.5, y: -2.5, z: 0}
 --- !u!1 &29763274
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,6 +840,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 98683259}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &98683258 stripped
@@ -2118,6 +2126,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 249841323}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &249841322 stripped
@@ -5223,6 +5239,14 @@ PrefabInstance:
       propertyPath: ResourceInfo
       value: 
       objectReference: {fileID: 11400000, guid: 85cdcc927bb77134c905fbff157541f3, type: 2}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b692be9c7d4cfff498339a327429a000, type: 3}
 --- !u!224 &926844030 stripped
@@ -5340,6 +5364,14 @@ PrefabInstance:
       propertyPath: ResourceInfo
       value: 
       objectReference: {fileID: 11400000, guid: 711d0b692d1b35e4ca5524e0c6b07b89, type: 2}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b692be9c7d4cfff498339a327429a000, type: 3}
 --- !u!224 &938781201 stripped
@@ -5473,6 +5505,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 996879064}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &996879063 stripped
@@ -6115,6 +6155,7 @@ MonoBehaviour:
   ResourceNameText: {fileID: 1773419540}
   DurationInTurnsText: {fileID: 997361188}
   CooldownInTurnsText: {fileID: 29763276}
+  FollowingCardController: {fileID: 1056617887}
 --- !u!114 &1056617887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6129,7 +6170,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rect: {fileID: 1056617883}
   ParentCanvas: {fileID: 1267939881}
-  OffsetPosition: {x: 2.5, y: -1.5, z: 0}
 --- !u!1001 &1092309470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6245,6 +6285,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 1092309472}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &1092309471 stripped
@@ -6389,6 +6437,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 1100922376}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &1100922375 stripped
@@ -7100,6 +7156,14 @@ PrefabInstance:
       propertyPath: ResourceInfo
       value: 
       objectReference: {fileID: 11400000, guid: c7db84e6aa78b02429bb693092d90153, type: 2}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b692be9c7d4cfff498339a327429a000, type: 3}
 --- !u!224 &1136913797 stripped
@@ -7389,6 +7453,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 1155275798}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &1155275797 stripped
@@ -9366,6 +9438,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 1411411879}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &1411411878 stripped
@@ -9986,6 +10066,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 1490211157}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &1490211155 stripped
@@ -10130,6 +10218,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 1497203548}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &1497203547 stripped
@@ -10779,6 +10875,14 @@ PrefabInstance:
       propertyPath: ResourceInfo
       value: 
       objectReference: {fileID: 11400000, guid: 3a13831c4392dba408bf40cb23fe25d8, type: 2}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b692be9c7d4cfff498339a327429a000, type: 3}
 --- !u!224 &1574631710 stripped
@@ -11239,6 +11343,14 @@ PrefabInstance:
       propertyPath: ResourceInfo
       value: 
       objectReference: {fileID: 11400000, guid: fe48b1105e00eae4996c6e65bfb5e830, type: 2}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b692be9c7d4cfff498339a327429a000, type: 3}
 --- !u!224 &1631118051 stripped
@@ -13178,6 +13290,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 2036741275}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &2036741274 stripped
@@ -13457,6 +13577,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 2040220055}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &2040220053 stripped
@@ -13601,6 +13729,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 2046384980}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &2046384979 stripped
@@ -14042,6 +14178,14 @@ PrefabInstance:
       propertyPath: ResourceInfo
       value: 
       objectReference: {fileID: 11400000, guid: f112ae03fe0da074dbe000ab6704ae4e, type: 2}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404433079636466553, guid: b692be9c7d4cfff498339a327429a000, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b692be9c7d4cfff498339a327429a000, type: 3}
 --- !u!224 &2135186044 stripped
@@ -14175,6 +14319,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 2140103194}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!224 &2140103193 stripped
@@ -14308,6 +14460,14 @@ PrefabInstance:
       propertyPath: ImageComponent
       value: 
       objectReference: {fileID: 1881986175}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717434456843108264, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
+      propertyPath: OffsetForCard.y
+      value: -2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
 --- !u!1001 &9162143261576528421

@@ -7,18 +7,19 @@ using UnityEngine.UI;
 public class ResourceItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] public NaturalResource ResourceInfo;
+    [SerializeField] Vector3 OffsetForCard;
     
     [Header("Components")]
     [SerializeField] Image Logo;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UIEvents.GetInstance().OnMouseResourceAction(ResourceInfo, true);
+        UIEvents.GetInstance().OnMouseResourceAction(ResourceInfo, true, OffsetForCard);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        UIEvents.GetInstance().OnMouseResourceAction(ResourceInfo, false);
+        UIEvents.GetInstance().OnMouseResourceAction(ResourceInfo, false,OffsetForCard);
     }
 
     private void Start()
