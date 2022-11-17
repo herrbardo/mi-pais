@@ -34,7 +34,6 @@ public class ProvinceCard : MonoBehaviour
         ProvinceEvents.GetInstance().ProvinceSelected += ProvinceSelected;
         ProvinceEvents.GetInstance().ActivityAssigned += ActivityAssigned;
         ProvinceEvents.GetInstance().ActivityUnassigned += ActivityUnassigned;
-        GameEvents.GetInstance().TurnChanged += TurnChanged;
     }
     
     private void Start()
@@ -50,7 +49,9 @@ public class ProvinceCard : MonoBehaviour
         ProvinceEvents.GetInstance().ProvinceSelected -= ProvinceSelected;
         ProvinceEvents.GetInstance().ActivityAssigned -= ActivityAssigned;
         ProvinceEvents.GetInstance().ActivityUnassigned -= ActivityUnassigned;
-        GameEvents.GetInstance().TurnChanged -= TurnChanged;
+
+        if(_selectedProvince != null)
+            _selectedProvince.ProvinceUpdated -= ProvinceUpdated;
     }
 
     void ProvinceSelected(ProvinceController controller)
@@ -58,6 +59,7 @@ public class ProvinceCard : MonoBehaviour
         ClearCard();
         TrashCan.ShowTrashCan = true;
         _selectedProvince = controller;
+        _selectedProvince.ProvinceUpdated += ProvinceUpdated;
         ArrastrarAquiText.enabled = true;
         SetKpis(controller);
         ShowNaturalResources(controller.Info.NaturalResources);
@@ -96,11 +98,14 @@ public class ProvinceCard : MonoBehaviour
 
     void ClearCard()
     {
+        if(_selectedProvince != null)
+            _selectedProvince.ProvinceUpdated -= ProvinceUpdated;
+
         ProvinceNameText.text = "Seleccione una provincia...";
         MoneyText.text = "$0";
         MoneyPerMonthText.text = "$0";
-        PopulationText.text = "$0";
-        EmployeesText.text = "$0";
+        PopulationText.text = "0";
+        EmployeesText.text = "0";
         EnvironmentPointsText.text = string.Empty;
         StateText.text = string.Empty;
         TrashCan.ShowTrashCan = false;
@@ -109,7 +114,7 @@ public class ProvinceCard : MonoBehaviour
             currentItem.gameObject.SetActive(false);
     }
 
-    void TurnChanged(int turn)
+    void ProvinceUpdated()
     {
         if(_selectedProvince != null)
             ProvinceSelected(_selectedProvince);
@@ -140,7 +145,10 @@ public class ProvinceCard : MonoBehaviour
         MoneyText.text = "Dinero: $" + controller.Money.ToString("N0");
         MoneyPerMonthText.text = "Gastos por turno: $" + controller.MonthlyExpenses.ToString("N0");
         PopulationText.text = "Población: " + controller.Population.ToString("N0");
-        EmployeesText.text = "Empleados: " + controller.PeopleEmployeed.ToString("N0");
+
+        EmployeesText.text = string.Format("Empleados: {0} Desocupación: {1}%", controller.PeopleEmployeed.ToString("N0"), controller.UnemploymentPercentage);
+        EmployeesText.color = (controller.UnemploymentPercentage >= controller.UnemploymentDangerousPercentage) ? Color.red : Color.white;
+
         EnvironmentPointsText.text = "Ambiente: " + controller.EnvironmentPoints.ToString("N0");
         StateText.text = "Estado: " + GetStateName(controller.State);
     }

@@ -11,6 +11,8 @@ public enum ProvinceState
     Disbanded
 }
 
+public delegate void ProvinceUpdatedDelegate();
+
 public class ProvinceController : MonoBehaviour
 {
     [SerializeField] SpriteRenderer SelectedTickSprite;
@@ -24,10 +26,13 @@ public class ProvinceController : MonoBehaviour
     [SerializeField] public int MonthlyExpenses;
     [SerializeField] public int EnvironmentPoints;
     [SerializeField] public ProvinceState State;
+    [SerializeField] public int UnemploymentPercentage;
+    [SerializeField] public int UnemploymentDangerousPercentage;
+
+    public event ProvinceUpdatedDelegate ProvinceUpdated;
 
     bool isSelected;
     int turnsWithDangeoursUnemployment;
-    int unemploymentDangerousPercentage;
     Dictionary<NaturalResourceCode, int> resourcesUse;
     Dictionary<NaturalResourceCode, int> resourcesCooldown;
     
@@ -42,7 +47,8 @@ public class ProvinceController : MonoBehaviour
         this.MonthlyExpenses = Info.MonthlyExpenses;
         this.EnvironmentPoints = Info.EnvironmentPoints;
         this.State = ProvinceState.Working;
-        this.unemploymentDangerousPercentage = 80;
+        this.UnemploymentDangerousPercentage = 80;
+        this.UnemploymentPercentage = 100;
         resourcesUse = new Dictionary<NaturalResourceCode, int>();
         resourcesCooldown = new Dictionary<NaturalResourceCode, int>();
     }
@@ -84,6 +90,7 @@ public class ProvinceController : MonoBehaviour
         CalculateActivityImpactPerTurn();
         CalculateUnemployment();
         EvaluateProvinceState();
+        OnProvinceUpdated();
     }
 
     void CalculateActivityImpactPerTurn()
@@ -140,11 +147,14 @@ public class ProvinceController : MonoBehaviour
     void CalculateUnemployment()
     {
         int unemployedPeople = Population - PeopleEmployeed;
-        decimal unemploymentPercentage = unemployedPeople / Population;
-        unemploymentPercentage *= 100;
-
-        if(unemploymentPercentage >= this.unemploymentDangerousPercentage)
+        double aux = ((double) unemployedPeople) / ((double) Population);
+        aux *= 100;
+        UnemploymentPercentage = (int) aux;
+        
+        if(UnemploymentPercentage >= this.UnemploymentDangerousPercentage)
             this.turnsWithDangeoursUnemployment++;
+        else
+            this.turnsWithDangeoursUnemployment = 0;
     }
 
     void EvaluateProvinceState()
@@ -202,5 +212,11 @@ public class ProvinceController : MonoBehaviour
             return resourcesCooldown[code];
         else
             return 0;
+    }
+
+    void OnProvinceUpdated()
+    {
+        if(ProvinceUpdated != null)
+            ProvinceUpdated();
     }
 }
