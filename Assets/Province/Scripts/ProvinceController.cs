@@ -29,6 +29,7 @@ public class ProvinceController : MonoBehaviour
     int turnsWithDangeoursUnemployment;
     int unemploymentDangerousPercentage;
     Dictionary<NaturalResourceCode, int> resourcesUse;
+    Dictionary<NaturalResourceCode, int> resourcesCooldown;
     
 
     private void Awake()
@@ -43,6 +44,7 @@ public class ProvinceController : MonoBehaviour
         this.State = ProvinceState.Working;
         this.unemploymentDangerousPercentage = 80;
         resourcesUse = new Dictionary<NaturalResourceCode, int>();
+        resourcesCooldown = new Dictionary<NaturalResourceCode, int>();
     }
 
     private void OnDestroy()
@@ -88,6 +90,7 @@ public class ProvinceController : MonoBehaviour
     {
         int remainingPopulation = Population;
         PeopleEmployeed = 0;
+        List<NaturalResource> usedResources = new List<NaturalResource>();
 
         foreach (Activity currentActivity in Activities)
         {
@@ -102,8 +105,12 @@ public class ProvinceController : MonoBehaviour
                 this.PeopleEmployeed += currentActivity.AmountEmployees;
                 this.Money += CalculateIncome(currentActivity, ref remainingPopulation);
                 SetResourceUse(currentResource);
+                usedResources.Add(currentResource);
             }
         }
+
+        List<NaturalResource> resourcesNotUsed = Info.NaturalResources.Where(r => !usedResources.Where(u => u.Code == r.Code).Any()).ToList();
+        RefreshCooldown(resourcesNotUsed);
     }
 
     int CalculateIncome(Activity activity, ref int remainingPopulation)
@@ -156,5 +163,36 @@ public class ProvinceController : MonoBehaviour
                 resourcesUse[resource.Code]++;
             else
                 resourcesUse.Add(resource.Code, 1);
+    }
+
+    void RefreshCooldown(List<NaturalResource> resources)
+    {
+        foreach (NaturalResource currentResource in resources)
+        {
+            if(resourcesCooldown.ContainsKey(currentResource.Code))
+            {
+                int cooldown = resourcesCooldown[currentResource.Code];
+                if(cooldown >= currentResource.CooldownInTurns)
+                {
+                    cooldown = 0;
+                    if(resourcesUse.ContainsKey(currentResource.Code))
+                        resourcesUse[currentResource.Code] = 0;
+                }
+                else
+                    cooldown++;
+
+                resourcesCooldown[currentResource.Code] = cooldown;
+            }
+            else
+                resourcesCooldown.Add(currentResource.Code, 1);
+        }
+    }
+
+    public int GetResourceUse(NaturalResourceCode code)
+    {
+        if(resourcesUse.ContainsKey(code))
+            return resourcesUse[code];
+        else
+            return 0;
     }
 }

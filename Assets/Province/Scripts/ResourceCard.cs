@@ -32,22 +32,23 @@ public class ResourceCard : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
-    void MouseResourceAction(NaturalResource resource, bool enter, Vector3 offset)
+    void MouseResourceAction(NaturalResource resource, bool enter, Vector3 offset, int resourceUse)
     {
         if(enter)
         {
             FollowingCardController.OffsetPosition = offset;
             Show();
-            FillCardWithResourceData(resource);
+            FillCardWithResourceData(resource, resourceUse);
         }
         else
             Hide();
     }
 
-    void FillCardWithResourceData(NaturalResource resource)
+    void FillCardWithResourceData(NaturalResource resource, int resourceUse)
     {
+        int turnsLeft = resource.DurationInTurns - resourceUse;
         ResourceNameText.text = resource.Name;
-        DurationInTurnsText.text = resource.DurationInTurns + " turnos";
+        DurationInTurnsText.text = string.Format("{0}/{1} turnos", turnsLeft, resource.DurationInTurns);
         CooldownInTurnsText.text = resource.CooldownInTurns + " turnos";
     }
 }

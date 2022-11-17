@@ -61,9 +61,13 @@ public class ProvinceCard : MonoBehaviour
         ArrastrarAquiText.enabled = true;
         SetKpis(controller);
         ShowNaturalResources(controller.Info.NaturalResources);
+
         Container.DisableAllActivities();
         foreach (Activity item in controller.Activities)
             Container.EnableActivity(item.Name);
+
+        foreach (ResourceItem currentResource in Resources)
+            currentResource.ProvinceController = _selectedProvince;
 
         ProvinceLostContainer.ShowState(controller.State);
     }
