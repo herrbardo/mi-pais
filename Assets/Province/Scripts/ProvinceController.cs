@@ -131,7 +131,7 @@ public class ProvinceController : MonoBehaviour
     {
         if(resourcesUse.ContainsKey(resource.Code))
         {
-            return resourcesUse[resource.Code] <= resource.DurationInTurns;
+            return resourcesUse[resource.Code] < resource.DurationInTurns;
         }
         else
             return true;
@@ -192,6 +192,14 @@ public class ProvinceController : MonoBehaviour
     {
         if(resourcesUse.ContainsKey(code))
             return resourcesUse[code];
+        else
+            return 0;
+    }
+
+    public int GetCooldown(NaturalResourceCode code)
+    {
+        if(resourcesCooldown.ContainsKey(code))
+            return resourcesCooldown[code];
         else
             return 0;
     }

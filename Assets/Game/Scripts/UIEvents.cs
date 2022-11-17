@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public delegate void MouseActivityActionDelegate(Activity activity, bool enter, Vector3 offset);
-public delegate void MouseResourceActionDelegate(NaturalResource resource, bool enter, Vector3 offset, int resourceUse);
+public delegate void MouseResourceActionDelegate(NaturalResource resource, bool enter, Vector3 offset, int resourceUse, int cooldown);
 public delegate void ElementBeginDragDelegate(PointerEventData eventData);
 public delegate void ElementEndDragDelegate(PointerEventData eventData);
 
@@ -32,10 +32,10 @@ public class UIEvents
             MouseActivityAction(item, enter, offset);
     }
 
-    public void OnMouseResourceAction(NaturalResource resource, bool enter, Vector3 offset, int resourceUse)
+    public void OnMouseResourceAction(NaturalResource resource, bool enter, Vector3 offset, int resourceUse, int cooldown)
     {
         if(MouseResourceAction != null)
-            MouseResourceAction(resource, enter, offset, resourceUse);
+            MouseResourceAction(resource, enter, offset, resourceUse, cooldown);
     }
 
     public void OnElementBeginDrag(PointerEventData eventData)

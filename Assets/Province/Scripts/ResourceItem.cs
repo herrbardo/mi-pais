@@ -16,16 +16,21 @@ public class ResourceItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        int resourceUse = -1;
-        if(ProvinceController != null)
-            resourceUse = ProvinceController.GetResourceUse(ResourceInfo.Code);
+        int resourceUse = 0;
+        int cooldown = 0;
 
-        UIEvents.GetInstance().OnMouseResourceAction(ResourceInfo, true, OffsetForCard, resourceUse);
+        if(ProvinceController != null)
+        {
+            resourceUse = ProvinceController.GetResourceUse(ResourceInfo.Code);
+            cooldown = ProvinceController.GetCooldown(ResourceInfo.Code);
+        }
+
+        UIEvents.GetInstance().OnMouseResourceAction(ResourceInfo, true, OffsetForCard, resourceUse, cooldown);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        UIEvents.GetInstance().OnMouseResourceAction(ResourceInfo, false, OffsetForCard, -1);
+        UIEvents.GetInstance().OnMouseResourceAction(ResourceInfo, false, OffsetForCard, 0, 0);
     }
 
     private void Start()

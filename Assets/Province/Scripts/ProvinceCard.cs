@@ -149,8 +149,9 @@ public class ProvinceCard : MonoBehaviour
     {
         foreach (NaturalResource item in naturalResources)
         {
-            ResourceItem localResourceItem = Resources.Where(r => r.ResourceInfo.Code == item.Code).First();
-            localResourceItem.gameObject.SetActive(true);
+            ResourceItem localResourceItem = Resources.Where(r => r.ResourceInfo.Code == item.Code).FirstOrDefault();
+            if(localResourceItem != null)
+                localResourceItem.gameObject.SetActive(true);
         }
 
         HorizontalLayoutGroup layoutGroup = ResourceContainer.GetComponent<HorizontalLayoutGroup>();
