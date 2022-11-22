@@ -9,7 +9,7 @@ public class DragNDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     [SerializeField] Canvas parentCanvas;
     RectTransform rectTransform;
     [SerializeField] CanvasGroup canvasGroup;
-    [SerializeField] HorizontalLayoutGroup LayoutGroup;
+    [SerializeField] GridLayoutGroup LayoutGroup;
     
     [Header("Behaviour")]
     [SerializeField] bool ReturnToOriginWhenRelease;
