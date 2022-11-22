@@ -152,7 +152,12 @@ public class ProvinceController : MonoBehaviour
         UnemploymentPercentage = (int) aux;
         
         if(UnemploymentPercentage >= this.UnemploymentDangerousPercentage)
+        {
             this.turnsWithDangeoursUnemployment++;
+
+            if(this.turnsWithDangeoursUnemployment <= 3)
+                MessagesEvents.GetInstance().OnMessagePublished(new MessageInfo(MessageType.Warning, string.Format("Desempleo preocupa en <b>{0}</b>.", Info.DisplayName)));
+        }
         else
             this.turnsWithDangeoursUnemployment = 0;
     }
@@ -160,11 +165,20 @@ public class ProvinceController : MonoBehaviour
     void EvaluateProvinceState()
     {
         if(this.Money <= 0)
+        {
             this.State = ProvinceState.Broke;
+            MessagesEvents.GetInstance().OnMessagePublished(new MessageInfo(MessageType.Error, string.Format("La provincia <b>{0}</b> está en quiebra.", Info.DisplayName)));
+        }
         else if(this.EnvironmentPoints <= 0)
+        {
             this.State = ProvinceState.Wasted;
+            MessagesEvents.GetInstance().OnMessagePublished(new MessageInfo(MessageType.Error, string.Format("<b>{0}</b> quedó inhabitable.", Info.DisplayName)));
+        }
         else if(this.turnsWithDangeoursUnemployment > 3)
+        {
             this.State = ProvinceState.Disbanded;
+            MessagesEvents.GetInstance().OnMessagePublished(new MessageInfo(MessageType.Error, string.Format("No queda nadie, todos abandonaron <b>{0}</b> por falta de empleo.", Info.DisplayName)));
+        }
     }
 
     void SetResourceUse(NaturalResource resource)
