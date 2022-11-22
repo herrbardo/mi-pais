@@ -2347,7 +2347,7 @@ PrefabInstance:
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: LayoutGroup
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1020273001}
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: parentCanvas
       value: 
@@ -2386,11 +2386,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5765,7 +5765,7 @@ PrefabInstance:
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: LayoutGroup
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1020273001}
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: parentCanvas
       value: 
@@ -5804,11 +5804,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6157,7 +6157,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1020272996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -6165,15 +6165,13 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
-  m_Spacing: 2.2
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 40, y: 40}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &1028944010
 GameObject:
   m_ObjectHideFlags: 0
@@ -6636,7 +6634,7 @@ PrefabInstance:
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: LayoutGroup
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1020273001}
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: parentCanvas
       value: 
@@ -6675,11 +6673,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7683,7 +7681,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: -47.22}
-  m_SizeDelta: {x: 364.6, y: 48.84}
+  m_SizeDelta: {x: 296.93, y: 48.84}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1153302187
 MonoBehaviour:
@@ -9155,6 +9153,10 @@ PrefabInstance:
       propertyPath: KPIName
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7460118078030943952, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
+      propertyPath: TooltipValue
+      value: Desempleo
+      objectReference: {fileID: 0}
     - target: {fileID: 7460118078030943957, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
       propertyPath: m_Name
       value: KpiItemUnemployment
@@ -9988,7 +9990,7 @@ PrefabInstance:
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: LayoutGroup
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1020273001}
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: parentCanvas
       value: 
@@ -10027,11 +10029,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10646,7 +10648,7 @@ PrefabInstance:
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: LayoutGroup
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1020273001}
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: parentCanvas
       value: 
@@ -10685,11 +10687,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11500,6 +11502,10 @@ PrefabInstance:
     - target: {fileID: 7460118078030943952, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
       propertyPath: KPIName
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460118078030943952, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
+      propertyPath: TooltipValue
+      value: "Poblaci\xF3n"
       objectReference: {fileID: 0}
     - target: {fileID: 7460118078030943957, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
       propertyPath: m_Name
@@ -13062,6 +13068,10 @@ PrefabInstance:
       propertyPath: KPIName
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7460118078030943952, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
+      propertyPath: TooltipValue
+      value: Empleados
+      objectReference: {fileID: 0}
     - target: {fileID: 7460118078030943957, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
       propertyPath: m_Name
       value: KpiItemEmployees
@@ -14315,7 +14325,7 @@ PrefabInstance:
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: LayoutGroup
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1020273001}
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: parentCanvas
       value: 
@@ -14354,11 +14364,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14602,7 +14612,7 @@ PrefabInstance:
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: LayoutGroup
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1020273001}
     - target: {fileID: 50654405652542514, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: parentCanvas
       value: 
@@ -14641,11 +14651,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50654405652542669, guid: ed9649a696193194aa71d7c8733eb7df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14919,6 +14929,10 @@ PrefabInstance:
     - target: {fileID: 7460118078030943952, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
       propertyPath: KPIName
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460118078030943952, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
+      propertyPath: TooltipValue
+      value: Medio ambiente
       objectReference: {fileID: 0}
     - target: {fileID: 7460118078030943957, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
       propertyPath: m_Name
