@@ -10,12 +10,6 @@ public class ProvinceCard : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] TMP_Text ProvinceNameText;
-    [SerializeField] TMP_Text MoneyText;
-    [SerializeField] TMP_Text MoneyPerMonthText;
-    [SerializeField] TMP_Text PopulationText;
-    [SerializeField] TMP_Text EmployeesText;
-    [SerializeField] TMP_Text EnvironmentPointsText;
-    [SerializeField] TMP_Text StateText;
     [SerializeField] TMP_Text NaturalResourcesText;
     [SerializeField] TMP_Text ArrastrarAquiText;
 
@@ -101,13 +95,14 @@ public class ProvinceCard : MonoBehaviour
         if(_selectedProvince != null)
             _selectedProvince.ProvinceUpdated -= ProvinceUpdated;
 
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.Money, 0));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.MoneyPerMonth, 0));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.Population, 0));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.PeopleEmployeed, 0));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.UnemploymentPercentage, 0));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.Environment, 0));
         ProvinceNameText.text = "Seleccione una provincia...";
-        MoneyText.text = "$0";
-        MoneyPerMonthText.text = "$0";
-        PopulationText.text = "0";
-        EmployeesText.text = "0";
-        EnvironmentPointsText.text = string.Empty;
-        StateText.text = string.Empty;
+
         TrashCan.ShowTrashCan = false;
 
         foreach (ResourceItem currentItem in Resources)
@@ -120,37 +115,15 @@ public class ProvinceCard : MonoBehaviour
             ProvinceSelected(_selectedProvince);
     }
 
-    string GetStateName(ProvinceState state)
-    {
-        switch(state)
-        {
-            case ProvinceState.Broke:
-                return "En quiebra";
-            
-            case ProvinceState.Wasted:
-                return "Arruinada";
-
-            case ProvinceState.Disbanded:
-                return "Desbandada";
-
-            case ProvinceState.Working:
-            default:
-                return "Funcionando";
-        }
-    }
-
     void SetKpis(ProvinceController controller)
     {
         ProvinceNameText.text = controller.Info.DisplayName;
-        MoneyText.text = "Dinero: $" + controller.Money.ToString("N0");
-        MoneyPerMonthText.text = "Gastos por turno: $" + controller.MonthlyExpenses.ToString("N0");
-        PopulationText.text = "Población: " + controller.Population.ToString("N0");
-
-        EmployeesText.text = string.Format("Empleados: {0} Desocupación: {1}%", controller.PeopleEmployeed.ToString("N0"), controller.UnemploymentPercentage);
-        EmployeesText.color = (controller.UnemploymentPercentage >= controller.UnemploymentDangerousPercentage) ? Color.red : Color.white;
-
-        EnvironmentPointsText.text = "Ambiente: " + controller.EnvironmentPoints.ToString("N0");
-        StateText.text = "Estado: " + GetStateName(controller.State);
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.Money, controller.Money));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.MoneyPerMonth, controller.MonthlyExpenses));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.Population, controller.Population));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.PeopleEmployeed, controller.PeopleEmployeed));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.UnemploymentPercentage, controller.UnemploymentPercentage));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.Environment, controller.EnvironmentPoints));
     }
 
     void ShowNaturalResources(List<NaturalResource> naturalResources)

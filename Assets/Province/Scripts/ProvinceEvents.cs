@@ -5,6 +5,7 @@ using UnityEngine;
 public delegate void ProvinceSelectedDelegate(ProvinceController provinceController);
 public delegate void ActivityAssignedDelegate(Activity activity);
 public delegate void ActivityUnassignedDelegate(Activity activity);
+public delegate void KPIUpdatedDelegate(KPIUpdatedInfo info);
 
 public class ProvinceEvents
 {
@@ -22,6 +23,7 @@ public class ProvinceEvents
     public event ProvinceSelectedDelegate ProvinceSelected;
     public event ActivityAssignedDelegate ActivityAssigned;
     public event ActivityUnassignedDelegate ActivityUnassigned;
+    public event KPIUpdatedDelegate KPIUpdated;
 
     public void OnProvinceSelected(ProvinceController provinceController)
     {
@@ -39,5 +41,11 @@ public class ProvinceEvents
     {
         if(ActivityUnassigned != null)
             ActivityUnassigned(activity);
+    }
+
+    public void OnKPIUpdated(KPIUpdatedInfo info)
+    {
+        if(KPIUpdated != null)
+            KPIUpdated(info);
     }
 }
