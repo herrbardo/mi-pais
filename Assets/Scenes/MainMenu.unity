@@ -6160,6 +6160,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 144623039}
     m_Modifications:
+    - target: {fileID: 3135133876087288593, guid: 89f8781cffaadd94a92d8e06312e9ce1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 189925063}
+    - target: {fileID: 3135133876087288593, guid: 89f8781cffaadd94a92d8e06312e9ce1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3135133876087288593, guid: 89f8781cffaadd94a92d8e06312e9ce1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3135133876087288594, guid: 89f8781cffaadd94a92d8e06312e9ce1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6768,7 +6780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4203696522729370162, guid: b8388cd16e1086e4eafab63a4f2e9f95, type: 3}
       propertyPath: Clips.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4203696522729370162, guid: b8388cd16e1086e4eafab63a4f2e9f95, type: 3}
       propertyPath: EffectsMaxVolume
@@ -6782,6 +6794,10 @@ PrefabInstance:
       propertyPath: Clips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: ce015867e8b6e3048a3a8b50552dc2e4, type: 3}
+    - target: {fileID: 4203696522729370162, guid: b8388cd16e1086e4eafab63a4f2e9f95, type: 3}
+      propertyPath: Clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 275f8ca2c6977b34e9f7c37bdd82c0fa, type: 3}
     - target: {fileID: 4203696522729370162, guid: b8388cd16e1086e4eafab63a4f2e9f95, type: 3}
       propertyPath: MusicExposedVolumeName
       value: MusicVolume

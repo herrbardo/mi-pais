@@ -15614,7 +15614,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: ee3e6677edf1051419b49b4a5c157b60, type: 3}
     - target: {fileID: 7460118078030943952, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
       propertyPath: KPIName
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7460118078030943952, guid: 6b8592164fd3d79459f614807f23b94f, type: 3}
       propertyPath: TooltipValue

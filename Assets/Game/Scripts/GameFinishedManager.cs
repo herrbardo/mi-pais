@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.UI;
 
 public class GameFinishedManager : MonoBehaviour
 {
+    [Header("Objects")]
+    [SerializeField] Sprite GameOverImage;
+
     [Header("Components")]
     [SerializeField] TMP_Text ResultLabel;
     [SerializeField] TMP_Text ProvincesValue;
     [SerializeField] TMP_Text MoneyValue;
     [SerializeField] TMP_Text UnemploymentValue;
+    [SerializeField] Image BackgroundComponent;
 
     private void Start()
     {
@@ -25,6 +30,8 @@ public class GameFinishedManager : MonoBehaviour
         {
             ResultLabel.text = "PÉSIMA";
             ResultLabel.color = Color.red;
+            GlobalDJ.Instance.PlaySong(1, true);
+            BackgroundComponent.sprite = GameOverImage;
         }
         else if(lostProvinces > 0)
         {

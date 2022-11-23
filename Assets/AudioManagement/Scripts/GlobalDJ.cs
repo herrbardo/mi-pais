@@ -49,6 +49,12 @@ public class GlobalDJ : MonoBehaviour
 
     public void PlaySong(int indexSong, bool loop)
     {
+        if(indexSong >= Clips.Count)
+        {
+            Debug.Log("No hay track con el index " + indexSong);
+            return;
+        }
+
         localIndexSong = indexSong;
         audioSource.loop = loop;
 
@@ -122,5 +128,10 @@ public class GlobalDJ : MonoBehaviour
             SwitchVolume(MusicExposedVolumeName, MusicMaxVolume, MusicMinVolume, enabled);
         else if(prefVariableName == EffectsPrefsVariableName)
             SwitchVolume(EffectsExposedVolumeName, EffectsMaxVolume, EffectsMinVolume, enabled);
+    }
+
+    public int GetCurrentIndexSong()
+    {
+        return localIndexSong;
     }
 }

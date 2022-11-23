@@ -22,7 +22,7 @@ public class ProvinceController : MonoBehaviour
     [Header("KPIs")]
     [SerializeField] public int Population;
     [SerializeField] public int PeopleEmployeed;
-    [SerializeField] public int Money;
+    [SerializeField] public double Money;
     [SerializeField] public int MonthlyExpenses;
     [SerializeField] public int EnvironmentPoints;
     [SerializeField] public ProvinceState State;
@@ -33,6 +33,7 @@ public class ProvinceController : MonoBehaviour
 
     bool isSelected;
     int turnsWithDangeoursUnemployment;
+    int maxTurnsWithDangerousUnemployment = 5;
     Dictionary<NaturalResourceCode, int> resourcesUse;
     Dictionary<NaturalResourceCode, int> resourcesCooldown;
     
@@ -111,8 +112,12 @@ public class ProvinceController : MonoBehaviour
                 this.EnvironmentPoints -= currentActivity.EnvironmentImpactPerTurn;
                 this.PeopleEmployeed += currentActivity.AmountEmployees;
                 this.Money += CalculateIncome(currentActivity, ref remainingPopulation);
-                SetResourceUse(currentResource);
-                usedResources.Add(currentResource);
+
+                if(!usedResources.Where(n => n.Code == currentResource.Code).Any())
+                {
+                    SetResourceUse(currentResource);
+                    usedResources.Add(currentResource);
+                }
             }
         }
 
@@ -155,8 +160,11 @@ public class ProvinceController : MonoBehaviour
         {
             this.turnsWithDangeoursUnemployment++;
 
-            if(this.turnsWithDangeoursUnemployment <= 3)
-                MessagesEvents.GetInstance().OnMessagePublished(new MessageInfo(MessageType.Warning, string.Format("Desempleo preocupa en <b>{0}</b>.", Info.DisplayName)));
+            if(this.turnsWithDangeoursUnemployment <= this.maxTurnsWithDangerousUnemployment)
+            {
+                string message = string.Format("Desempleo preocupa en <b>{0}</b>. Turnos para perder provincia: {1}/{2}", Info.DisplayName, this.turnsWithDangeoursUnemployment, this.maxTurnsWithDangerousUnemployment);
+                MessagesEvents.GetInstance().OnMessagePublished(new MessageInfo(MessageType.Warning, message));
+            }
         }
         else
             this.turnsWithDangeoursUnemployment = 0;
