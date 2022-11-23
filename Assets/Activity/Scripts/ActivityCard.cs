@@ -9,6 +9,7 @@ public class ActivityCard : MonoBehaviour
     [SerializeField] TMP_Text ActivityNameText;
     [SerializeField] TMP_Text IncomePerPersonText;
     [SerializeField] TMP_Text EmployeesText;
+    [SerializeField] TMP_Text EnvironmentImpactValue;
     [SerializeField] List<ResourceItem> Resources;
     [SerializeField] FollowingCard FollowingCardController;
 
@@ -49,6 +50,7 @@ public class ActivityCard : MonoBehaviour
         ActivityNameText.text = activity.Name;
         IncomePerPersonText.text = activity.IncomePerPerson.ToString("N0");
         EmployeesText.text = activity.AmountEmployees.ToString("N0");
+        EnvironmentImpactValue.text = activity.EnvironmentImpactPerTurn + "%";
         
         foreach (ResourceItem currentResource in Resources)
         {
