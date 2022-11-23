@@ -34,6 +34,7 @@ public class ProvinceController : MonoBehaviour
     bool isSelected;
     int turnsWithDangeoursUnemployment;
     int maxTurnsWithDangerousUnemployment = 5;
+    int refreshEnvironmentPointsByInactivity = 25;
     Dictionary<NaturalResourceCode, int> resourcesUse;
     Dictionary<NaturalResourceCode, int> resourcesCooldown;
     
@@ -99,6 +100,7 @@ public class ProvinceController : MonoBehaviour
         int remainingPopulation = Population;
         PeopleEmployeed = 0;
         List<NaturalResource> usedResources = new List<NaturalResource>();
+        bool atLeastOneActivityImpact = false;
 
         foreach (Activity currentActivity in Activities)
         {
@@ -108,7 +110,7 @@ public class ProvinceController : MonoBehaviour
             {
                 if(!ResourceIsAvailable(currentResource))
                     continue;
-                
+                atLeastOneActivityImpact = true;
                 this.EnvironmentPoints -= currentActivity.EnvironmentImpactPerTurn;
                 this.PeopleEmployeed += currentActivity.AmountEmployees;
                 this.Money += CalculateIncome(currentActivity, ref remainingPopulation);
@@ -123,6 +125,9 @@ public class ProvinceController : MonoBehaviour
 
         List<NaturalResource> resourcesNotUsed = Info.NaturalResources.Where(r => !usedResources.Where(u => u.Code == r.Code).Any()).ToList();
         RefreshCooldown(resourcesNotUsed);
+
+        if(!atLeastOneActivityImpact)
+            RefreshEnvironment();
     }
 
     int CalculateIncome(Activity activity, ref int remainingPopulation)
@@ -182,7 +187,7 @@ public class ProvinceController : MonoBehaviour
             this.State = ProvinceState.Wasted;
             MessagesEvents.GetInstance().OnMessagePublished(new MessageInfo(MessageType.Error, string.Format("<b>{0}</b> quedó inhabitable.", Info.DisplayName)));
         }
-        else if(this.turnsWithDangeoursUnemployment > 3)
+        else if(this.turnsWithDangeoursUnemployment > this.maxTurnsWithDangerousUnemployment)
         {
             this.State = ProvinceState.Disbanded;
             MessagesEvents.GetInstance().OnMessagePublished(new MessageInfo(MessageType.Error, string.Format("No queda nadie, todos abandonaron <b>{0}</b> por falta de empleo.", Info.DisplayName)));
@@ -240,5 +245,12 @@ public class ProvinceController : MonoBehaviour
     {
         if(ProvinceUpdated != null)
             ProvinceUpdated();
+    }
+
+    void RefreshEnvironment()
+    {
+        this.EnvironmentPoints += this.refreshEnvironmentPointsByInactivity;
+        if(this.EnvironmentPoints > 100)
+            this.EnvironmentPoints = 100;
     }
 }

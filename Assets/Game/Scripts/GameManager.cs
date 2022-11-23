@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
 
     public void MoveNextTurn()
     {
+        if(Turn >= MaxTurn)
+            return;
+        
         Turn++;
         CurrentDate = CurrentDate.AddMonths(1);
         GameEvents.GetInstance().OnTurnChanged(Turn);

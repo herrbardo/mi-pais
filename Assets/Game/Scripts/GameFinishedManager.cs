@@ -24,7 +24,7 @@ public class GameFinishedManager : MonoBehaviour
         double totalMoney = ManagementResult.GetInstance().Provinces.Select(p => p.Money).Sum();
         double totalPopulation = ManagementResult.GetInstance().Provinces.Select(p => p.Population).Sum();
         double totalEmployees = ManagementResult.GetInstance().Provinces.Select(p => p.PeopleEmployeed).Sum();
-        double unemploymentPercentage = (totalEmployees == 0) ? 100 : totalEmployees / totalPopulation * 100;
+        int employmentPercentage = (totalEmployees == 0) ? 0 : (int) (totalEmployees / totalPopulation * 100);
 
         if(totalProvinces == lostProvinces)
         {
@@ -46,6 +46,6 @@ public class GameFinishedManager : MonoBehaviour
 
         ProvincesValue.text = string.Format("{0}/{1}", (totalProvinces - lostProvinces), totalProvinces);
         MoneyValue.text = string.Format("${0:N0}", totalMoney);
-        UnemploymentValue.text = string.Format("{0}%", unemploymentPercentage);
+        UnemploymentValue.text = string.Format("{0}%", 100 - employmentPercentage);
     }
 }

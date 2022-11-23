@@ -32,6 +32,7 @@ public class MessagesWindow : MonoBehaviour
 
     void MessagePublished(MessageInfo messageInfo)
     {
+        messageInfo.MessageDate = GameManager.CurrentDate;
         messages.Enqueue(messageInfo);
     }
 
@@ -48,7 +49,7 @@ public class MessagesWindow : MonoBehaviour
 
         TMP_Text text = newLine.GetComponent<TMP_Text>();
         text.text =  "\n";
-        text.text += Utilities.ConvertDateToDisplayMonthDate(GameManager.CurrentDate) + "\n";
+        text.text += Utilities.ConvertDateToDisplayMonthDate(info.MessageDate) + "\n";
         text.text += string.Format("- {0}", info.Message);
         switch (info.Type)
         {
