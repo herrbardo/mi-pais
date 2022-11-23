@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class MessagesWindow : MonoBehaviour
 {
     [SerializeField] GameObject MessageLinePrefab;
     [SerializeField] GameObject Container;
     [SerializeField] float PostMessageInterval;
-
-    int currentTurn;
+    [SerializeField] GameManager GameManager;
 
     Queue<MessageInfo> messages;
 
@@ -18,25 +18,21 @@ public class MessagesWindow : MonoBehaviour
     {
         messages = new Queue<MessageInfo>();
         MessagesEvents.GetInstance().MessagePublished += MessagePublished;
-        GameEvents.GetInstance().TurnChanged += TurnChanged;
     }
 
     private void Start()
     {
         InvokeRepeating("PostMessage", 1f, PostMessageInterval);
-        currentTurn = 1;
     }
 
     private void OnDestroy()
     {
         MessagesEvents.GetInstance().MessagePublished -= MessagePublished;
-        GameEvents.GetInstance().TurnChanged -= TurnChanged;
     }
 
     void MessagePublished(MessageInfo messageInfo)
     {
         messages.Enqueue(messageInfo);
-        
     }
 
     void PostMessage()
@@ -51,7 +47,9 @@ public class MessagesWindow : MonoBehaviour
         newLine.transform.SetSiblingIndex(0);
 
         TMP_Text text = newLine.GetComponent<TMP_Text>();
-        text.text = string.Format("[T:{0}] - {1}", currentTurn, info.Message);
+        text.text =  "\n";
+        text.text += Utilities.ConvertDateToDisplayMonthDate(GameManager.CurrentDate) + "\n";
+        text.text += string.Format("- {0}", info.Message);
         switch (info.Type)
         {
             case MessageType.Good:
@@ -75,10 +73,5 @@ public class MessagesWindow : MonoBehaviour
     public bool AnyMessagesLeft()
     {
         return messages.Count > 0;
-    }
-
-    void TurnChanged(int turn)
-    {
-        this.currentTurn = turn;
     }
 }

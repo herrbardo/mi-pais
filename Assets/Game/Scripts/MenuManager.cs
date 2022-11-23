@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        if(!GlobalDJ.Instance.IsBusy())
+            GlobalDJ.Instance.PlaySong(0, true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

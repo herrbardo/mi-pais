@@ -42,8 +42,6 @@ public class KpiItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if(ImageComponent != null)
             ImageComponent.sprite = Logo;
-        // if(DescriptionTooltip != null)
-        //     DescriptionTooltip.SetActive(false);
     }
 
     private void Start()
@@ -58,7 +56,28 @@ public class KpiItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(info.KPIName != KPIName)
             return;
 
-        ValueText.text = info.Value.ToString("N0");
+        string valueToAddToTooltip = string.Empty;
+
+        switch (info.Type)
+        {
+            case KPIType.Text:
+            default:
+                ValueText.text = info.ValueText;
+                valueToAddToTooltip = info.ValueText;
+            break;
+
+            case KPIType.Percentage:
+                ValueText.text = info.ValueNumber + " %";
+                valueToAddToTooltip = ValueText.text;
+            break;
+
+            case KPIType.Number:
+                ValueText.text = FormatNumber(info.ValueNumber);
+                valueToAddToTooltip = info.ValueNumber.ToString("N0");
+            break;
+        }
+
+        TooltipText.text = TooltipValue + " " + valueToAddToTooltip;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -69,5 +88,14 @@ public class KpiItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         DescriptionTooltip.SetActive(false);
+    }
+
+    string FormatNumber(double number)
+    {
+        if(number >= 1000000)
+            return (number / 1000000).ToString("N0") + " M";
+        else if(number >= 100000)
+            return (number / 100000).ToString("N0") + " K";
+        return number.ToString("N0");
     }
 }

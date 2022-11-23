@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         while(MessagesWindow.AnyMessagesLeft())
             yield return new WaitForSeconds(5);
 
+        ManagementResult.GetInstance().Provinces = Provinces;
         TransitionEvents.GetInstance().OnTransitionToScene("GameFinished");
         yield return null;
     }

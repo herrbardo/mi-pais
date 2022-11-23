@@ -18,4 +18,9 @@ public class ButtonTransition : MonoBehaviour
     {
         TransitionEvents.GetInstance().OnTransitionToScene(SceneToGo);
     }
+    private void OnDrawGizmos()
+    {
+        if(ButtonText != null && DisplayText != null)
+            ButtonText.text = DisplayText;
+    }
 }

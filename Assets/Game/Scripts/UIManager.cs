@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
 
     void DisplayTurnInfo()
     {
-        Date.text = GameManager.CurrentDate.ToString("MMMM yyy");
+        Date.text = Utilities.ConvertDateToDisplayMonthDate(GameManager.CurrentDate);
         Turn.text = string.Format("{0:00}/{1}", GameManager.Turn, GameManager.MaxTurn);
     }
 

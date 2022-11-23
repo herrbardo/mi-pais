@@ -99,7 +99,7 @@ public class ProvinceCard : MonoBehaviour
         ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.MoneyPerMonth, 0));
         ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.Population, 0));
         ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.PeopleEmployeed, 0));
-        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.UnemploymentPercentage, 0));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.UnemploymentPercentage, 0, KPIType.Percentage));
         ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.Environment, 0));
         ProvinceNameText.text = "Seleccione una provincia...";
 
@@ -122,7 +122,7 @@ public class ProvinceCard : MonoBehaviour
         ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.MoneyPerMonth, controller.MonthlyExpenses));
         ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.Population, controller.Population));
         ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.PeopleEmployeed, controller.PeopleEmployeed));
-        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.UnemploymentPercentage, controller.UnemploymentPercentage));
+        ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.UnemploymentPercentage, controller.UnemploymentPercentage, KPIType.Percentage));
         ProvinceEvents.GetInstance().OnKPIUpdated(new KPIUpdatedInfo(KPIName.Environment, controller.EnvironmentPoints));
     }
 
